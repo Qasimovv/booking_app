@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//
+
 
 class AppSize {
   static  double calculateHeight(BuildContext context, size) {
