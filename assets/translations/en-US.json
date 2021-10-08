@@ -98,6 +98,8 @@
   "what_is_your_email_adress":"What is your e-mail adress?",
   "send_password_reset_email":"Send a password reset email",
   "check_inbox":"Check your inbox for a link to reset your password",
-  "recovery_problem":"There was a problem during the operation."
+  "recovery_problem":"There was a problem during the operation.",
+  "register_completed":"Registration completed."
+
 }
 

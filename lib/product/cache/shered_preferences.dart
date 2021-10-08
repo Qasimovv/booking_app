@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesUtils {
-  static getAllShared(
+  static writeAllShared(
       {String authorization,
       int userId,
       bool isLoggedIn,

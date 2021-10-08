@@ -36,9 +36,7 @@ class _CompanyEmployeeLginPageState extends State<CompanyEmployeeLginPage> {
       key: Keys.scaffoldKey2,
       body: SafeArea(
         child: SingleChildScrollView(
-            child: Stack(
-          children: [
-            Column(
+            child: Column(
               children: [
                 SizedBox(height: AppSize.calculateHeight(context, 95)),
                 Center(child: TerminImageWidget(height: 76, widgth: 184)),
@@ -78,7 +76,10 @@ class _CompanyEmployeeLginPageState extends State<CompanyEmployeeLginPage> {
                     backgroundColor: Colors.white,
                     textColor: ColorConst.programTextColor,
                     title: 'sign_up',
-                    onPressed: () {}),
+                    onPressed: () {
+                       SetupRoutes.replaceScreen(
+                          context, Routes.COMPANY_EMPLOYEE_REGISTER);
+                    }),
                 SizedBox(
                   height: calculateHeight(context, 173),
                 ),
@@ -90,9 +91,7 @@ class _CompanyEmployeeLginPageState extends State<CompanyEmployeeLginPage> {
                   },
                 ),
               ],
-            ),
-          ],
-        )),
+            )),
       ),
     );
   }

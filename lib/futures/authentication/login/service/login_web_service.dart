@@ -14,7 +14,7 @@ class LoginWebService {
         body: jsonEncode(userLoginRequestModel));
     print(response.statusCode);
     if (response.statusCode == 200) {
-      SharedPreferencesUtils.getAllShared(
+      SharedPreferencesUtils.writeAllShared(
           authorization: response.headers['authorization'],
           userId: json.decode(response.body.toString())['data']['id'],
           isLoggedIn: true,

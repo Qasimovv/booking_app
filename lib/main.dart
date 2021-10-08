@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_app/futures/authentication/login/view-model/user_login_view_model.dart';
+import 'package:test_app/futures/authentication/register/user_register/view-model/user_register_view_model.dart';
 // import 'package:test_app/screens/sigin_and_signup/main/main_page.dart';
 import 'core/routes/routes.dart';
 import 'futures/authentication/login/recovery-password/view-model/recovery_password_view_model.dart';
@@ -52,6 +53,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => PasswordRecoveryViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserRegisterViewModel(),
         ),
       ],
       child: MaterialApp(

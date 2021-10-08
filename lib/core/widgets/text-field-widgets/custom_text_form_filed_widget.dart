@@ -12,6 +12,7 @@ class CustomTextFormField extends StatefulWidget {
     @required this.onSaved,
     this.validations=Validations.validateAll,
     this.defaultColor = Colors.black,
+    this.prefixText=''
     
   }) : super(key: key);
 
@@ -24,6 +25,7 @@ class CustomTextFormField extends StatefulWidget {
 
   //final Function onFocusChange;
   final Function onSaved;
+  final String prefixText;
 
   @override
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
@@ -57,9 +59,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           //     password = data;
           //   });
           // },
+          
           obscureText: widget.obscureText,
           validator: widget.validations,
           decoration: InputDecoration(
+            prefixText: widget.prefixText,
             contentPadding: EdgeInsets.only(left: 10),
             hintText: widget.hintText.tr(),
             labelText: widget.labelText.tr(),

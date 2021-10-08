@@ -3,8 +3,8 @@ import 'package:test_app/core/constant/routes-names.dart';
 import 'package:test_app/futures/authentication/login/view/company_employee_login_view.dart';
 import 'package:test_app/futures/authentication/login/view/user_login_view.dart';
 import 'package:test_app/futures/authentication/main/view/main_page.dart';
-import 'package:test_app/futures/authentication/register/company_employee_register/company_employee_register_view.dart';
-import 'package:test_app/futures/authentication/register/user_register/user_register_view.dart';
+import 'package:test_app/futures/authentication/register/company_register/view/company_employee_register_view.dart';
+import 'package:test_app/futures/authentication/register/user_register/view/user_register_view.dart';
 
 class SetupRoutes {
   // Set initial route here

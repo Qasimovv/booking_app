@@ -6,5 +6,5 @@ class Urls {
   static const companyLoginU = '';
   static const passwordRecoveryUrl =
       'api/auth/users/password/sendRecoveryEmail';
-      
+  static const userRegisterUrl = 'api/auth/users/signup';
 }

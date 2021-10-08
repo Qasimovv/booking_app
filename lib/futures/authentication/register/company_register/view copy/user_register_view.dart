@@ -1,152 +1,109 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/constants.dart';
+import 'package:provider/provider.dart';
 import 'package:test_app/core/constant/app_size.dart';
 import 'package:test_app/core/constant/colors.dart';
 import 'package:test_app/core/constant/key.dart';
-import 'package:test_app/core/constant/routes-names.dart';
-import 'package:test_app/core/routes/routes.dart';
 import 'package:test_app/core/validations/validations.dart';
 import 'package:test_app/core/widgets/button-widgets/rectangle_button.dart';
-import 'package:test_app/core/widgets/button-widgets/text_button.dart';
 import 'package:test_app/core/widgets/image-widgets/termin_image_widget.dart';
-import 'package:test_app/core/widgets/loading_widgets/loading_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:test_app/core/widgets/loading_widgets/loading_widget.dart';
+import 'package:test_app/core/widgets/sncakbar_widget/snackbar_widget.dart';
 import 'package:test_app/core/widgets/text-field-widgets/custom_text_form_filed_widget.dart';
-import 'package:test_app/futures/authentication/login/view-model/user_login_view_model.dart';
-import 'package:provider/provider.dart';
-import 'package:test_app/futures/authentication/login/recovery-password/view/recovery_password_view.dart';
+import 'package:test_app/futures/authentication/register/user_register/view-model/user_register_view_model.dart';
 
-class UserLoginPage extends StatefulWidget {
-  const UserLoginPage({Key key}) : super(key: key);
+class UserRegisterPage extends StatefulWidget {
+  const UserRegisterPage({Key key}) : super(key: key);
 
   @override
-  _UserLoginPageState createState() => _UserLoginPageState();
+  _UserRegisterPageState createState() => _UserRegisterPageState();
 }
 
-class _UserLoginPageState extends State<UserLoginPage> {
+class _UserRegisterPageState extends State<UserRegisterPage> {
   int selectIndex = 0;
-  String email, password;
+
+  String name, surname, email, phone, password, rpass;
+  int userTypesEnum = 1;
+
   //Keys keyy = new Keys();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: Keys.scaffoldKey,
-      body: SafeArea(
-        child: SingleChildScrollView(
-            child: Stack(
-          children: [
-            Column(
+        key: Keys.scaffoldKeyUserRegister,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
               children: [
-                SizedBox(height: AppSize.calculateHeight(context, 95)),
-                Center(child: TerminImageWidget(height: 76, widgth: 184)),
-                SizedBox(height: AppSize.calculateHeight(context, 58)),
-                Center(child: selectedBar(context)),
-                SizedBox(height: AppSize.calculateHeight(context, 30)),
-                _form(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 0.0, left: 26),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      buildTextButton(context),
-                    ],
-                  ),
+                Column(
+                  children: [
+                    SizedBox(height: AppSize.calculateHeight(context, 95)),
+                    Center(child: TerminImageWidget(height: 76, widgth: 184)),
+                    SizedBox(height: AppSize.calculateHeight(context, 58)),
+                    Center(child: selectedBar(context)),
+                    SizedBox(height: AppSize.calculateHeight(context, 30)),
+                    _form(),
+                    SizedBox(
+                      height: AppSize.calculateHeight(context, 30),
+                    ),
+                    RectangleButton(
+                      backgroundColor: ColorConst.programColor,
+                      borderColor: ColorConst.programColor,
+                      textColor: ColorConst.whiteTextColor,
+                      onPressed: () {
+                        checkValidate(context);
+                      },
+                      title: 'register',
+                      height: 32,
+                      width: 153,
+                    ),
+                    SizedBox(
+                      height: AppSize.calculateHeight(context, 13),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          // Route route = MaterialPageRoute(builder: (context) => SigninPage());
+                          // Navigator.pushReplacement(context, route);
+                        },
+                        child: Text(
+                          'do_you_have_an_account'.tr(),
+                          style: TextStyle(
+                            shadows: [
+                              Shadow(
+                                  color: ColorConst.programColor,
+                                  offset: Offset(0, -5))
+                            ],
+                            color: Colors.transparent,
+                            fontSize: 16,
+                            decorationColor: ColorConst.programColor,
+                            decoration: TextDecoration.underline,
+                          ),
+                        )),
+                  ],
                 ),
-                SizedBox(
-                  height: calculateHeight(context, 30),
-                ),
-                RectangleButton(
-                    width: 153,
-                    height: 32,
-                    borderColor: ColorConst.programColor,
-                    backgroundColor: ColorConst.programColor,
-                    textColor: ColorConst.whiteTextColor,
-                    title: 'login',
+                TextButton(
                     onPressed: () {
-                      checkValidate(context);
-                    }),
-                SizedBox(
-                  height: AppSize.calculateHeight(context, 12),
-                ),
-                RectangleButton(
-                    width: 153,
-                    height: 32,
-                    borderColor: ColorConst.programColor,
-                    backgroundColor: Colors.white,
-                    textColor: ColorConst.programTextColor,
-                    title: 'sign_up',
-                    onPressed: () {
-                      SetupRoutes.replaceScreen(
-                          context, Routes.USER_REGISTER_PAGE);
-                    }),
-                SizedBox(
-                  height: calculateHeight(context, 173),
-                ),
-                CustomTextButton(
-                  text: 'business_account',
-                  onPressed: () {
-                    SetupRoutes.replaceScreen(
-                        context, Routes.COMPANY_EMPLOYEE_LOGIN);
-                  },
-                ),
+                      // Route route = MaterialPageRoute(builder: (context) => SigninBusinessPage());
+                      // Navigator.pushReplacement(context, route);
+                    },
+                    child: Text(
+                      'business_account'.tr(),
+                      style: TextStyle(
+                        shadows: [
+                          Shadow(
+                              color: ColorConst.programColor,
+                              offset: Offset(0, -5))
+                        ],
+                        color: Colors.transparent,
+                        fontSize: 16,
+                        decorationColor: ColorConst.programColor,
+                        decoration: TextDecoration.underline,
+                      ),
+                    )),
               ],
             ),
-          ],
-        )),
-      ),
-    );
-  }
-
-  TextButton buildTextButton(BuildContext context) {
-    return TextButton(
-        onPressed: () {
-          //openAlertBox(context);
-          //openAlertBox2(context);
-          RecoveryPassword.openRecoveryPassword(context, Keys.scaffoldKey);
-        },
-        child: Text('forget_password'.tr(),
-            style: TextStyle(
-              fontSize: 10,
-              color: Colors.black,
-            )));
-  }
-
-  Form _form() {
-    return Form(
-      key: formKey,
-      child: Column(
-        children: [
-          CustomTextFormField(
-            obscureText: false,
-            hintText: 'email',
-            labelText: 'email',
-            focusColor: ColorConst.programColor,
-            defaultColor: Colors.black,
-            validations: Validations.validateEmail,
-            onSaved: (data) {
-              setState(() {
-                email = data;
-              });
-            },
           ),
-          CustomTextFormField(
-            obscureText: true,
-            hintText: 'password',
-            labelText: 'password',
-            defaultColor: Colors.black,
-            focusColor: ColorConst.programColor,
-            validations: Validations.validateAll,
-            onSaved: (data) {
-              setState(() {
-                password = data;
-              });
-            },
-          ),
-        ],
-      ),
-    );
+        ));
   }
 
   Container selectedBar(BuildContext context) {
@@ -165,7 +122,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                   onPressed: () {
                     setState(() {
                       selectIndex = 0;
-                      formKey.currentState.reset();
+                      Keys.formKeyUserRegister.currentState.reset();
                     });
                   },
                   child: Row(
@@ -220,7 +177,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                       setState(() {
                         selectIndex = 1;
                       });
-                      formKey.currentState.reset();
+                      Keys.formKeyUserRegister.currentState.reset();
                     },
                     child: Row(
                       children: [
@@ -309,6 +266,95 @@ class _UserLoginPageState extends State<UserLoginPage> {
     );
   }
 
+  Form _form() {
+    return Form(
+      key: Keys.formKeyUserRegister,
+      child: Column(
+        children: [
+          CustomTextFormField(
+            obscureText: false,
+            hintText: 'text',
+            labelText: 'name',
+            focusColor: ColorConst.programColor,
+            defaultColor: Colors.black,
+            validations: Validations.validateAll,
+            onSaved: (data) {
+              setState(() {
+                name = data;
+              });
+            },
+          ),
+          CustomTextFormField(
+            obscureText: false,
+            hintText: 'text',
+            labelText: 'surname',
+            defaultColor: Colors.black,
+            focusColor: ColorConst.programColor,
+            validations: Validations.validateAll,
+            onSaved: (data) {
+              setState(() {
+                surname = data;
+              });
+            },
+          ),
+          CustomTextFormField(
+            obscureText: false,
+            hintText: 'text',
+            labelText: 'email',
+            defaultColor: Colors.black,
+            focusColor: ColorConst.programColor,
+            validations: Validations.validateEmail,
+            onSaved: (data) {
+              setState(() {
+                email = data;
+              });
+            },
+          ),
+          CustomTextFormField(
+            obscureText: false,
+            hintText: 'text',
+            labelText: 'phone',
+            defaultColor: Colors.black,
+            focusColor: ColorConst.programColor,
+            validations: Validations.validateAll,
+            prefixText: '+',
+            onSaved: (data) {
+              setState(() {
+                phone = data;
+              });
+            },
+          ),
+          CustomTextFormField(
+            obscureText: true,
+            hintText: 'text',
+            labelText: 'password',
+            defaultColor: Colors.black,
+            focusColor: ColorConst.programColor,
+            validations: Validations.validateAll,
+            onSaved: (data) {
+              setState(() {
+                password = data;
+              });
+            },
+          ),
+          CustomTextFormField(
+            obscureText: true,
+            hintText: 'text',
+            labelText: 'rpass',
+            defaultColor: Colors.black,
+            focusColor: ColorConst.programColor,
+            validations: Validations.validateAll,
+            onSaved: (data) {
+              setState(() {
+                rpass = data;
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   showLoaderDialog(BuildContext context) {
     LoadingWidget alert = LoadingWidget();
     showDialog(
@@ -321,12 +367,23 @@ class _UserLoginPageState extends State<UserLoginPage> {
   }
 
   checkValidate(BuildContext context) async {
-    if (formKey.currentState.validate()) {
-      formKey.currentState.save();
-
-      showLoaderDialog(context);
-      Provider.of<UserLoginViewModel>(context, listen: false)
-          .login(context, email: email, password: password, userTypeEnum: 0);
+    if (Keys.formKeyUserRegister.currentState.validate()) {
+      Keys.formKeyUserRegister.currentState.save();
+      if (password == rpass) {
+        showLoaderDialog(context);
+        Provider.of<UserRegisterViewModel>(context, listen: false).userSignUp(
+            email,
+            name,
+            surname,
+            phone,
+            password,
+            context,
+            Keys.scaffoldKeyUserRegister);
+      } else {
+        
+        MakeSnackBar.showInSnackBar(
+            'register_completed', Colors.red, Keys.scaffoldKeyUserRegister);
+      }
     } else {}
   }
 }
