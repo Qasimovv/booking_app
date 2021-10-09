@@ -7,4 +7,7 @@ class Urls {
   static const passwordRecoveryUrl =
       'api/auth/users/password/sendRecoveryEmail';
   static const userRegisterUrl = 'api/auth/users/signup';
+  static const companyRegisterUrl = 'api/companies/signup';
+  static const employeeRegisterUrl = 'api/employees/signup';
+  
 }

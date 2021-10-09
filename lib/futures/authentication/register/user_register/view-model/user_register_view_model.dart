@@ -11,16 +11,10 @@ class UserRegisterViewModel with ChangeNotifier {
   UserRegisterViewModel() {
     //
   }
-  userSignUp(email, name, surname, phone, pasword, context, scaffoldKey) async {
+  userSignUp(UserRegisterRequestModel userRegisterRequestModel, context, scaffoldKey) async {
     try {
       //state = JobState.BUSY;
-      UserRegisterRequestModel userRegisterRequestModel =
-          new UserRegisterRequestModel(
-              email: email,
-              name: name,
-              password: pasword,
-              surname: surname,
-              phoneNumber: phone);
+      
       var res =
           await UserRegisterWebService.userSigUp(userRegisterRequestModel);
       if (res == true) {

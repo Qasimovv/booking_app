@@ -10,6 +10,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:test_app/core/widgets/loading_widgets/loading_widget.dart';
 import 'package:test_app/core/widgets/sncakbar_widget/snackbar_widget.dart';
 import 'package:test_app/core/widgets/text-field-widgets/custom_text_form_filed_widget.dart';
+import 'package:test_app/futures/authentication/register/user_register/models/user_register_request_model.dart';
 import 'package:test_app/futures/authentication/register/user_register/view-model/user_register_view_model.dart';
 
 class UserRegisterPage extends StatefulWidget {
@@ -371,16 +372,12 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
       Keys.formKeyUserRegister.currentState.save();
       if (password == rpass) {
         showLoaderDialog(context);
+        UserRegisterRequestModel userRegisterRequestModel = UserRegisterRequestModel(email: email,password: password,name: name,phoneNumber: phone,surname: surname);
         Provider.of<UserRegisterViewModel>(context, listen: false).userSignUp(
-            email,
-            name,
-            surname,
-            phone,
-            password,
+            userRegisterRequestModel,
             context,
             Keys.scaffoldKeyUserRegister);
       } else {
-        
         MakeSnackBar.showInSnackBar(
             'register_completed', Colors.red, Keys.scaffoldKeyUserRegister);
       }

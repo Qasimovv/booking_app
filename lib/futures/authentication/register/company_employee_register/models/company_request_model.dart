@@ -1,6 +1,6 @@
 import 'package:test_app/core/models/location_model.dart';
 
-class CompanyRequestModel {
+class CompanyRegisterRequestModel {
   String addressDetails;
   String email;
   Location location;
@@ -8,7 +8,7 @@ class CompanyRequestModel {
   String password;
   String phoneNumber;
 
-  CompanyRequestModel(
+  CompanyRegisterRequestModel(
       {this.addressDetails,
       this.email,
       this.location,
@@ -16,7 +16,7 @@ class CompanyRequestModel {
       this.password,
       this.phoneNumber});
 
-  CompanyRequestModel.fromJson(Map<String, dynamic> json) {
+  CompanyRegisterRequestModel.fromJson(Map<String, dynamic> json) {
     addressDetails = json['addressDetails'];
     email = json['email'];
     location = json['location'] != null
