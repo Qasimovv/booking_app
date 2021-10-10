@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/core/constant/key.dart';
+import 'package:test_app/core/constant/routes-names.dart';
+import 'package:test_app/core/routes/routes.dart';
 import 'package:test_app/core/widgets/sncakbar_widget/snackbar_widget.dart';
 import 'package:test_app/futures/authentication/register/company_employee_register/models/company_request_model.dart';
 import 'package:test_app/futures/authentication/register/company_employee_register/models/employee_request_model.dart';
@@ -21,14 +23,12 @@ class CompanyEmployeeRegisterViewModel with ChangeNotifier {
       if (res == true) {
         // state = JobState.IDLE;
         Keys.formKeyComanyEmployeeRegister.currentState.reset();
-        //   //  Route route = MaterialPageRoute(builder: (context) => NavigationForUser());
-        //   //  Navigator.pushReplacement(context, route);
         Navigator.pop(context);
 
         MakeSnackBar.showInSnackBar('register_completed'.tr(), Colors.green,
             Keys.scaffoldKeyCompanyEmployeeRegister);
         Future.delayed(const Duration(milliseconds: 1000), () {
-         // SetupRoutes.replaceScreen(context, Routes.USER_LOGIN_PAGE);
+         SetupRoutes.replaceScreen(context, Routes.COMPANY_EMPLOYEE_LOGIN);
         });
       } else {
         Navigator.pop(context);
@@ -41,7 +41,7 @@ class CompanyEmployeeRegisterViewModel with ChangeNotifier {
     }
   }
 
-empoyeeRegister(
+employeeRegister(
       EmployeeRegisterRequestModel employeeRegisterRequestModel, context) async {
     try {
       //state = JobState.BUSY;

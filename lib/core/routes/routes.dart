@@ -3,6 +3,7 @@ import 'package:test_app/core/constant/routes-names.dart';
 import 'package:test_app/futures/authentication/login/view/company_employee_login_view.dart';
 import 'package:test_app/futures/authentication/login/view/user_login_view.dart';
 import 'package:test_app/futures/authentication/main/view/main_page.dart';
+import 'package:test_app/futures/authentication/register/company_employee_register/view/company_employee_register_view.dart';
 import 'package:test_app/futures/authentication/register/user_register/view/user_register_view.dart';
 
 class SetupRoutes {
@@ -17,7 +18,7 @@ class SetupRoutes {
       Routes.USER_LOGIN_PAGE: (context) => UserLoginPage(),
       Routes.USER_REGISTER_PAGE: (context) => UserRegisterPage(),
       Routes.COMPANY_EMPLOYEE_LOGIN: (context) => CompanyEmployeeLginPage(),
-     // Routes.COMPANY_EMPLOYEE_REGISTER: (context) => CompanyEmployeeRegisterPage(),
+      Routes.COMPANY_EMPLOYEE_REGISTER: (context) => CompanyEmployeeRegisterPage(),
 
 
 

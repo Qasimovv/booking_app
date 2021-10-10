@@ -3,8 +3,8 @@ class Location {
   String city;
   String country;
   String details;
-  int latitude;
-  int longitude;
+  double latitude;
+  double longitude;
   String postCode;
 
   Location(

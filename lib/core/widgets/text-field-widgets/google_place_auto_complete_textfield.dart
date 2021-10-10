@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:google_places_flutter/google_places_flutter.dart';
 import 'package:test_app/core/validations/validations.dart';
 import 'package:easy_localization/easy_localization.dart';
-class CustomTextFormField extends StatefulWidget {
-  const CustomTextFormField({
-    Key key,
-    @required this.obscureText,
-    @required this.hintText,
-    @required this.labelText,
-    this.textEditingController,
-    this.focusColor = Colors.blue,
-    //@required this.onFocusChange,
-    @required this.onSaved,
-    this.validations=Validations.validateAll,
-    this.defaultColor = Colors.black,
-    this.prefixText=''
-    
-  }) : super(key: key);
 
-  final bool obscureText;
+class CustomGooglePlaceAutoCompleteTextField extends StatefulWidget {
+  const CustomGooglePlaceAutoCompleteTextField(
+      {Key key,
+      @required this.hintText,
+      @required this.labelText,
+      @required this.getPlaceDetailWithLatLng,
+      @required this.itmClick,
+      @required this.textEditingController,
+      this.focusColor = Colors.blue,
+      //@required this.onFocusChange,
+      @required this.onSaved,
+      this.validations = Validations.validateAll,
+      this.defaultColor = Colors.black,
+      this.prefixText = ''})
+      : super(key: key);
+
   final String hintText;
   final String labelText;
   final Color defaultColor;
@@ -27,15 +28,15 @@ class CustomTextFormField extends StatefulWidget {
   //final Function onFocusChange;
   final Function onSaved;
   final String prefixText;
+  final Function getPlaceDetailWithLatLng;
+  final Function itmClick;
   final TextEditingController textEditingController;
 
   @override
-  _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
+  _CustomGooglePlaceAutoCompleteTextFieldState createState() => _CustomGooglePlaceAutoCompleteTextFieldState();
 }
 
-class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  
-
+class _CustomGooglePlaceAutoCompleteTextFieldState extends State<CustomGooglePlaceAutoCompleteTextField> {
   Color color;
   @override
   void initState() {
@@ -54,17 +55,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       //onFocusChange: widget.onFocusChange,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
-        child: TextFormField(
-          onSaved: widget.onSaved,
-          // onSaved: (data) {
-          //   setState(() {
-          //     password = data;
-          //   });
-          // },
-          controller: widget.textEditingController,
-          obscureText: widget.obscureText,
-          validator: widget.validations,
-          decoration: InputDecoration(
+        child: GooglePlaceAutoCompleteTextField(
+          
+          textEditingController: widget.textEditingController,
+    
+          // obscureText: widget.obscureText,
+          // validator: widget.validations,
+          googleAPIKey: "AIzaSyD1caUC_1LXjslxGkc6QaGk5jgrOqoUHbM",
+          isLatLngRequired: true,
+          getPlaceDetailWithLatLng: widget.getPlaceDetailWithLatLng,
+          itmClick: widget.itmClick,
+          inputDecoration: InputDecoration(
             prefixText: widget.prefixText,
             contentPadding: EdgeInsets.only(left: 10),
             hintText: widget.hintText.tr(),
@@ -77,6 +78,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               borderSide: BorderSide(color: color),
             ),
           ),
+          debounceTime: 10,
         ),
       ),
     );

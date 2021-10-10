@@ -105,6 +105,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
             ),
           ),
         ));
+  
   }
 
   Container selectedBar(BuildContext context) {
@@ -383,4 +384,6 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
       }
     } else {}
   }
+
+
 }
