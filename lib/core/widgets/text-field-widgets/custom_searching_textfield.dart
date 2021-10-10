@@ -33,7 +33,7 @@ class CustomSearchingTextField extends StatefulWidget {
   final String prefixText;
   final TextEditingController textEditingController;
   final SuggestionsCallback suggestionsCallback;
-  final ItemBuilder itemBuilder;
+  final Function itemBuilder;
   final Function onSuggestionSelected;
 
   @override

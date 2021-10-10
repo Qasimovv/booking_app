@@ -3,6 +3,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:google_place/google_place.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 import 'package:provider/provider.dart';
+import 'package:test_app/controller/company_controller.dart';
 import 'package:test_app/core/constant/app_size.dart';
 import 'package:test_app/core/constant/colors.dart';
 import 'package:test_app/core/constant/key.dart';
@@ -259,17 +260,17 @@ class _CompanyEmployeeRegisterPageState
     return Column(
       children: [
         CustomSearchingTextField(
-          suggestionsCallback: (suggestion) async {
+          suggestionsCallback: (pattern) async {
             // return await getUsers(pattern);
-            return null;
+            return await getUsers(pattern);
           },
           itemBuilder: (context, suggestion) {
             return ListTile(
               leading: Icon(Icons.account_circle),
               title: Text(suggestion['name']),
-              subtitle: (suggestion['location']['address'] != null)
-                  ? Text(suggestion['location']['address'])
-                  : Text(''),
+              // subtitle: (suggestion['location']['address'] != null)
+              //     ? Text(suggestion['location']['address'])
+              //     : Text(''),
               //subtitle: Text('\$${suggestion['price']}'),
             );
           },
