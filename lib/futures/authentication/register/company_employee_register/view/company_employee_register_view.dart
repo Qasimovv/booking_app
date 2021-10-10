@@ -12,6 +12,7 @@ import 'package:test_app/core/widgets/button-widgets/rectangle_button.dart';
 import 'package:test_app/core/widgets/image-widgets/termin_image_widget.dart';
 import 'package:test_app/core/widgets/loading_widgets/loading_widget.dart';
 import 'package:test_app/core/widgets/sncakbar_widget/snackbar_widget.dart';
+import 'package:test_app/core/widgets/text-field-widgets/custom_searching_textfield.dart';
 import 'package:test_app/core/widgets/text-field-widgets/custom_text_form_filed_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:test_app/core/widgets/text-field-widgets/google_place_auto_complete_textfield.dart';
@@ -257,6 +258,26 @@ class _CompanyEmployeeRegisterPageState
   Column _buildEmployeeColumn() {
     return Column(
       children: [
+        CustomSearchingTextField(
+          suggestionsCallback: (suggestion) async {
+            // return await getUsers(pattern);
+            return null;
+          },
+          itemBuilder: (context, suggestion) {
+            return ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text(suggestion['name']),
+              subtitle: (suggestion['location']['address'] != null)
+                  ? Text(suggestion['location']['address'])
+                  : Text(''),
+              //subtitle: Text('\$${suggestion['price']}'),
+            );
+          },
+          onSuggestionSelected: (suggestion) {},
+          hintText: 'text',
+          labelText: 'company_name',
+          obscureText: false,
+        ),
         CustomTextFormField(
           obscureText: false,
           hintText: 'text',
@@ -411,6 +432,19 @@ class _CompanyEmployeeRegisterPageState
   Column _buildCompanyColumn() {
     return Column(
       children: [
+        CustomTextFormField(
+          obscureText: false,
+          hintText: 'text',
+          labelText: 'company_name',
+          focusColor: ColorConst.programColor,
+          defaultColor: Colors.black,
+          validations: Validations.validateAll,
+          onSaved: (data) {
+            setState(() {
+              companyName = data;
+            });
+          },
+        ),
         CustomGooglePlaceAutoCompleteTextField(
           labelText: 'address',
           hintText: 'text',
@@ -425,19 +459,6 @@ class _CompanyEmployeeRegisterPageState
           },
           getPlaceDetailWithLatLng: (data) {},
           textEditingController: addressController,
-        ),
-        CustomTextFormField(
-          obscureText: false,
-          hintText: 'text',
-          labelText: 'company_name',
-          focusColor: ColorConst.programColor,
-          defaultColor: Colors.black,
-          validations: Validations.validateAll,
-          onSaved: (data) {
-            setState(() {
-              companyName = data;
-            });
-          },
         ),
         CustomTextFormField(
           textEditingController: cityController,
